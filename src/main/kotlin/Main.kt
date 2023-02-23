@@ -12,17 +12,23 @@ fun compute(input: String):String {
 /*input.map { computePrivate(it.toString()) }.reduce {a,b -> a+b}*/
 }
 
+
+private fun isDivisibleBy(number: Int, divisor: Int) = number % divisor == 0
+
 private fun computePrivate(input: String):String{
     val i = input.toInt()
-    return when {
-        i%3 == 0 -> {
-            "Foo"
-        }
-        i%5 == 0 -> {
-            "Bar"
-        }
-        else -> {
-            input
-        }
+    var result = ""
+    if (isDivisibleBy(i, 3)) {
+        result += "Foo"
     }
+    if (isDivisibleBy(i, 5)) {
+        result += "Bar"
+    }
+    if (isDivisibleBy(i, 7)) {
+        result += "Qix"
+    }
+    if (!isDivisibleBy(i, 3) && !isDivisibleBy(i, 5) && !isDivisibleBy(i, 7)) {
+        return input
+    }
+    return result
 }

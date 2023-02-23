@@ -27,9 +27,21 @@ class FooBarQixTest {
     }
 
     @Test
+    fun `compute return Qix if given input is divisible only by 7`() {
+        val result = compute("14")
+        result shouldBe "Qix"
+    }
+
+    @Test
     fun `compute return FooBar if given input is divisible by 3 and 5`() {
         val result = compute("15")
         result shouldBe "FooBar"
+    }
+
+    @Test
+    fun `compute return FooBarQix if given input is divisible by 3, 5 and 7`() {
+        val result = compute("105")
+        result shouldBe "FooBarQix"
     }
 
 }
