@@ -24,9 +24,9 @@ class FooBarQixTest {
     }
 
     @Test
-    fun `compute return Bar if given input is divisible only by 5`() {
-        val result = compute("20")
-        result shouldBe "Bar"
+    fun `compute return BarBar if given input is divisible only by 5 and contains 5`() {
+        val result = compute("5")
+        result shouldBe "BarBar"
     }
 
     @Test
@@ -36,15 +36,15 @@ class FooBarQixTest {
     }
 
     @Test
-    fun `compute return FooBar if given input is divisible by 3 and 5`() {
+    fun `compute return FooBar* if given input is divisible by 3 and 5`() {
         val result = compute("60")
-        result shouldBe "FooBar"
+        result shouldBe "FooBar*"
     }
 
     @Test
     fun `compute return FooBarQixBar if given input is divisible by 3, 5 and 7 and contains 5`() {
         val result = compute("105")
-        result shouldBe "FooBarQixBar"
+        result shouldBe "FooBarQix*Bar"
     }
 
     @Test
@@ -56,7 +56,7 @@ class FooBarQixTest {
     @Test
     fun `compute return BarQix if given input is divisible by 5 and 7`() {
         val result = compute("140")
-        result shouldBe "BarQix"
+        result shouldBe "BarQix*"
     }
 
     @Test
@@ -71,7 +71,7 @@ class FooBarQixTest {
         compute(input) shouldBe expected
     }
 
-    companion object{
+    companion object {
         @JvmStatic
         fun computeReturnExpected() = listOf(
             Arguments.of("1", "1"),
@@ -83,7 +83,7 @@ class FooBarQixTest {
             Arguments.of("7", "QixQix"),
             Arguments.of("8", "8"),
             Arguments.of("9", "Foo"),
-            Arguments.of("10", "Bar"),
+            Arguments.of("10", "Bar*"),
             Arguments.of("13", "Foo"),
             Arguments.of("15", "FooBarBar"),
             Arguments.of("21", "FooQix"),
@@ -92,5 +92,28 @@ class FooBarQixTest {
             Arguments.of("53", "BarFoo"),
         )
     }
+}
 
+
+    class FooBarQixTestWithStar {
+    @Test
+    fun `compute return 1*1 if given input is 101`() {
+        val result = compute("101")
+        result shouldBe "1*1"
+    }
+
+    @ParameterizedTest(name = "compute return {1} if given {0}")
+    @MethodSource("computeReturnExpectedWithStar")
+    fun `compute return expected with star`(input: String, expected: String) {
+        compute(input) shouldBe expected
+    }
+
+    companion object computeReturnExpectedWithStar{
+        @JvmStatic
+        fun computeReturnExpectedWithStar() = listOf(
+            Arguments.of("303", "FooFoo*Foo"),
+            Arguments.of("105", "FooBarQix*Bar"),
+            Arguments.of("10101", "FooQix**"),
+        )
+    }
 }

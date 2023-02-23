@@ -11,10 +11,13 @@ fun compute(input: String):String {
     var divisibilityString = computeStringWithDivisibility(input)
     val occurrenceString = input.map { mapCharToString(it.toString()) }.reduce { a, b -> a+b}
     if (divisibilityString == input) {
-         if(occurrenceString.isEmpty()) {
-             return input
-         }
-        return occurrenceString
+        return if(occurrenceString.isEmpty()) {
+            input
+        } else if (occurrenceString.contains("*")) {
+            input.replace("0", "*")
+        }else {
+            occurrenceString
+        }
     }
     return divisibilityString + occurrenceString
 }
@@ -25,6 +28,7 @@ private fun mapCharToString(input : String) : String {
         "3" -> "Foo"
         "5" -> "Bar"
         "7" -> "Qix"
+        "0" -> "*"
         else -> ""
     }
 }
