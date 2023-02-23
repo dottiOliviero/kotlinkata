@@ -17,6 +17,7 @@ dependencies {
     testImplementation(platform("io.kotest:kotest-bom:5.5.5"))
     testImplementation("io.kotest:kotest-assertions-core")
     testImplementation("io.kotest:kotest-assertions-json")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
 }
 
 tasks.test {

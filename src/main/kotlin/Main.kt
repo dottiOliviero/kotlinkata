@@ -8,14 +8,30 @@ fun main(args: Array<String>) {
 
 
 fun compute(input: String):String {
-    return computePrivate(input)
-/*input.map { computePrivate(it.toString()) }.reduce {a,b -> a+b}*/
+    var divisibilityString = computeStringWithDivisibility(input)
+    val occurrenceString = input.map { mapCharToString(it.toString()) }.reduce { a, b -> a+b}
+    if (divisibilityString == input) {
+         if(occurrenceString.isEmpty()) {
+             return input
+         }
+        return occurrenceString
+    }
+    return divisibilityString + occurrenceString
 }
 
 
+private fun mapCharToString(input : String) : String {
+    return when (input) {
+        "3" -> "Foo"
+        "5" -> "Bar"
+        "7" -> "Qix"
+        else -> ""
+    }
+}
+
 private fun isDivisibleBy(number: Int, divisor: Int) = number % divisor == 0
 
-private fun computePrivate(input: String):String{
+private fun computeStringWithDivisibility(input: String):String{
     val i = input.toInt()
     var result = ""
     if (isDivisibleBy(i, 3)) {
